@@ -10,12 +10,12 @@ PASSWORD = 'token'
 
 # The repository to add this issue to
 REPO_OWNER = 'ringwormGO-organization'
-REPO_NAME = 'Croatix'
+repo_name = None
 
 def make_github_issue(title, body=None):
     '''Create an issue on github.com using the given parameters.'''
     # Our url to create issues via POST
-    url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, REPO_NAME)
+    url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, repo_name)
     # Create an authenticated session to create the issue
     session = requests.Session()
     session.auth = (USERNAME, PASSWORD)
@@ -26,14 +26,15 @@ def make_github_issue(title, body=None):
     # Add the issue to our repository
     r = session.post(url, json.dumps(issue))
     if r.status_code == 201:
-        print('Successfully created issue {0:s}'.format(title))
+        print(f"Successfully created issue {format(title)}")
     else:
-        print('Could not create Issue {0:s}'.format(title))
-        print('Response:', r.content)
+        print(f"Could not create Issue {format(title)}")
+        print("Response:", r.content)
 
 
 if __name__ == "__main__":
     if sys.argv[1] == "-h":
-        print("<title> <body>")
+        print("<repo name> <title> <body>")
 
-    make_github_issue(sys.argv[1], sys.argv[2])
+    repo_name = sys.argv[1]
+    make_github_issue(sys.argv[2], sys.argv[3])
