@@ -6,7 +6,7 @@ import requests
 # Authentication for user filing issue (must have read/write access to
 # repository to add issue to)
 USERNAME = 'VanGutan'
-PASSWORD = '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'
+PASSWORD = 'token'
 
 # The repository to add this issue to
 REPO_OWNER = 'ringwormGO-organization'

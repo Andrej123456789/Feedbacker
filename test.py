@@ -6,7 +6,7 @@ import requests
 
 # Authentication for account designed to create issue (must have read/write access to repository to add issue to)
 USERNAME = "VanGutan"
-TOKEN = "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"
+TOKEN = "token"
 
 # The repository to add this issue to
 REPO_OWNER = "ringwormGO-organization"
