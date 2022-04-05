@@ -3,17 +3,16 @@ import sys
 import json
 import requests
 
-# Authentication for user filing issue (must have read/write access to
-# repository to add issue to)
-USERNAME = 'VanGutan'
-PASSWORD = 'token'
+# Authentication for user filing issue
+USERNAME = 'VanGutan' # change this to own username
+PASSWORD = 'token' # change this to own token
 
 # The repository to add this issue to
 REPO_OWNER = 'ringwormGO-organization'
 repo_name = None
 
 def make_github_issue(title, body=None):
-    '''Create an issue on github.com using the given parameters.'''
+    #Create an issue on github.com using the given parameters.
     # Our url to create issues via POST
     url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, repo_name)
     # Create an authenticated session to create the issue
