@@ -7,11 +7,18 @@ import requests
 
 # Authentication for user filing issue
 USERNAME = 'VanGutan' # change this to own username
-PASSWORD = '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' # change this to own token
+PASSWORD = '' # change this to own token
 
 # The repository to add this issue to
 REPO_OWNER = 'ringwormGO-organization'
 repo_name = None
+
+def get_operating_system() -> str:
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    if sys.platform == "win32": 
+        return "Windows"
+    else:
+        return "GNU/Linux"
 
 def help():
     print("<repo name> <title> <body>")
@@ -21,7 +28,11 @@ def write_time():
     if exists(".time.txt"):
         os.remove(".time.txt")
 
-    f = open(".time.txt", "a+")
+    if get_operating_system() == "Windows":
+        f = open(".time.txt", "a+")
+        os.system("attrib +h .time.txt")
+    else:
+        f = open(".time.txt", "a+")
     f.write(str(time.time()))
 
 def check_time() -> int:
@@ -37,6 +48,16 @@ def check_time() -> int:
     else:
         print("Can't check time, writing from this moment!")
         return 2
+
+def return_time() -> float:
+    if exists(".time.txt"):
+        f = open(".time.txt", "r")
+        return float(f.read())
+    else:
+        print("Writing time...")
+        write_time()
+        f = open(".time.txt", "r")
+        return float(f.read())
 
 def make_github_issue(title, body=None):
     #Create an issue on github.com using the given parameters.
